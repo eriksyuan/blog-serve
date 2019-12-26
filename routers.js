@@ -22,12 +22,12 @@ for (let file of js_files) {
 const upload = require('./routes/other/upload')
 
 router.post('/admin/upload', upload.single('file'), ctx => {
-    console.log(ctx.req.file)
+    let uri = ctx.request.headers.host
     ctx.body = {
         status: 0,
         message: '上传成功',
         data: {
-            file:"http://localhost:3000"+'/images/'+ ctx.req.file.filename
+            file:'http://'+uri+'/images/'+ ctx.req.file.filename
         }
     }
 })

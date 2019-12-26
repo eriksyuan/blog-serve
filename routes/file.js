@@ -15,5 +15,5 @@ const removeFile = async function (ctx, next) {
 
 
 module.exports = [
-  { 'method': 'delete', 'path': '/api/serve/removefile', 'fn': removeFile }
+  { 'method': 'delete', 'path': 'admin/removefile', 'fn': removeFile }
 ]
