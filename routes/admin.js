@@ -47,6 +47,6 @@ const getInfo = async function (ctx, next) {
 
 
 module.exports = [
-  { 'method': 'post', 'path': '/api/admin/login', 'fn': login },
-  { 'method': 'get', 'path': '/api/admin/info', 'fn': getInfo },
+  { 'method': 'post', 'path': '/api/serve/login', 'fn': login },
+  { 'method': 'get', 'path': '/api/serve/info', 'fn': getInfo },
 ]

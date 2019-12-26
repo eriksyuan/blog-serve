@@ -138,8 +138,8 @@ const removeArCy = async function (ctx) {
 
 
 module.exports = [
-    { 'method': 'post', 'path': '/api/admin/classify/addArCy', 'fn': addArCy },
-    { 'method': 'get', 'path': '/api/admin/classify/getAll', 'fn': getArCy },
-    { 'method': 'put', 'path': '/api/admin/changeArCy', 'fn': changeArCy },
-    { 'method': 'delete', 'path': '/api/admin/classify/removeArCy', 'fn': removeArCy },
+    { 'method': 'post', 'path': '/api/serve/classify/addArCy', 'fn': addArCy },
+    { 'method': 'get', 'path': '/api/serve/classify/getAll', 'fn': getArCy },
+    { 'method': 'put', 'path': '/api/serve/changeArCy', 'fn': changeArCy },
+    { 'method': 'delete', 'path': '/api/serve/classify/removeArCy', 'fn': removeArCy },
 ]
