@@ -58,5 +58,4 @@ const login = async function (ctx, next) {
 module.exports = [
   { 'method': 'post', 'path': '/api/register', 'fn': register },
   { 'method': 'post', 'path': '/api/login', 'fn': login }
-
 ]

@@ -166,11 +166,11 @@ const adminGetDetail = async function (ctx, next) {
 }
 
 module.exports = [
-    { 'method': 'post', 'path': '/admin/article/createNew', 'fn': createNewArticle },
-    { 'method': 'delete', 'path': '/admin/article/remove', 'fn': remove },
-    { 'method': 'put', 'path': '/admin/article/change', 'fn': changeArticle },
-    { 'method': 'get', 'path': '/admin/article/getDetail', 'fn': adminGetDetail },
-    { 'method': 'get', 'path': '/admin/article/getArticles', 'fn': getArticles },
+    { 'method': 'post', 'path': '/api/admin/article/createNew', 'fn': createNewArticle },
+    { 'method': 'delete', 'path': '/api/admin/article/remove', 'fn': remove },
+    { 'method': 'put', 'path': '/api/admin/article/change', 'fn': changeArticle },
+    { 'method': 'get', 'path': '/api/admin/article/getDetail', 'fn': adminGetDetail },
+    { 'method': 'get', 'path': '/api/admin/article/getArticles', 'fn': getArticles },
     { 'method': 'get', 'path': '/api/articles', 'fn': getArticlesOfIssue },
     { 'method': 'get', 'path': '/api/detail', 'fn': getDetail },
 ]
