@@ -115,7 +115,7 @@ const getArticlesOfIssue = async function (ctx, next) {
         message: '',
         data: {}
     }
-    console.log('haha')
+   
     await ArticleModel.getAllArticlesOfIssue().then((doc) => {
         res = {
             status: 0,
@@ -144,6 +144,7 @@ const getDetail = async function (ctx, next) {
     }).catch(err => {
         res.message = '错误'
     })
+
     ctx.body = res
 }
 
@@ -161,7 +162,10 @@ const adminGetDetail = async function (ctx, next) {
             data: data
         }
         console.log(res)
+    }).catch(e=>{
+        console.log(e)
     })
+    console.log(res)
     ctx.body = res
 }
 

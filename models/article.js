@@ -190,14 +190,31 @@ articleSchme.statics.getAllArticlesOfIssue = function () {
 articleSchme.statics.getDetail = function (id) {
     let that = this
     return new Promise(function (resolve, reject) {
-        that.findOne({ issue: 0, _id: id }, '-issue -detele -issueTime', function (err, doc) {
+        that.findOneAndUpdate({ issue: 0, _id: id }, {
+            $inc: { readNum: 1 }
+        }, function (err, doc) {
             if (err) reject(err)
             if (doc && doc._id) {
-                that.findOne({ issue: 0, createTime: { $ne: doc.createTime } }, '-issue -delete -issueTime', function (er, next) {
-                    if (er) reject(er)
+                that.find({ issue: 0 }, '-issue -delete -issueTime', function (er, arr) {
+                    let i
                     var data = {}
-                    data.detail = doc
-                    data.next = next
+                    arr.forEach((item, index) => {
+                        if (item.id === id) {
+                            i = index
+                            return
+                        }
+                    })
+                    data.detail = arr[i]
+                    if (arr.length === 1) {
+                        data.next = {}
+                        data.last = {}
+                    } else if (arr.length === i + 1) {
+                        data.last = arr[i - 1]
+                        data.next = {}
+                    } else {
+                        data.next = arr[i + 1]
+                        data.last = arr[i - 1]
+                    }
                     resolve(data)
                 })
             } else {
