@@ -23,11 +23,14 @@ const upload = require('./routes/other/upload')
 
 router.post('/admin/upload', upload.single('file'), ctx => {
     let uri = ctx.request.headers.host
+    if (process.env.NODE_ENV === 'production') {
+        uri = uri.split(':')[0]
+    }
     ctx.body = {
         status: 0,
         message: '上传成功',
         data: {
-            file:'http://'+uri+'/images/'+ ctx.req.file.filename
+            file: 'http://' + uri + '/images/' + ctx.req.file.filename
         }
     }
 })
