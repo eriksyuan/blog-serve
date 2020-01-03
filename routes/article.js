@@ -1,6 +1,6 @@
 const ArticleModel = require('../models/article')
 
-
+const { getClientIp } = require('../utils/util')
 
 //新建（更改）文章
 const createNewArticle = async function (ctx, next) {
@@ -86,7 +86,6 @@ const getArticles = async function (ctx, next) {
                 break;
         }
     }
-    console.log(sort)
     if (pageNo) {
         skip = {
             page: Number(pageNo) - 1,
@@ -115,7 +114,7 @@ const getArticlesOfIssue = async function (ctx, next) {
         message: '',
         data: {}
     }
-   
+
     await ArticleModel.getAllArticlesOfIssue().then((doc) => {
         res = {
             status: 0,
@@ -130,6 +129,7 @@ const getArticlesOfIssue = async function (ctx, next) {
 
 const getDetail = async function (ctx, next) {
     let { id } = ctx.query
+    console.log(getClientIp(ctx.req))
     var res = {
         status: 1,
         message: '',
@@ -162,7 +162,7 @@ const adminGetDetail = async function (ctx, next) {
             data: data
         }
         console.log(res)
-    }).catch(e=>{
+    }).catch(e => {
         console.log(e)
     })
     console.log(res)
