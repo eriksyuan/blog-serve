@@ -184,7 +184,7 @@ articleSchme.statics.fifterArticle = function (keyword, obj, skip, sort) {
     })
 }
 articleSchme.statics.getAllArticlesOfIssue = function () {
-    return this.find({ issue: 0 }, '-issue -delete -issueTime').sort({createTime:1}).populate('classify').exec()
+    return this.find({ issue: 0 }, '-issue -delete -issueTime').sort({createTime:-1}).populate('classify').exec()
 }
 
 articleSchme.statics.getDetail = function (id) {
@@ -195,7 +195,7 @@ articleSchme.statics.getDetail = function (id) {
         }, function (err, doc) {
             if (err) reject(err)
             if (doc && doc._id) {
-                that.find({ issue: 0 }, '-issue -delete -issueTime').sort({ createTime: 1 }).exec(function (er, arr) {
+                that.find({ issue: 0 }, '-issue -delete -issueTime').sort({ createTime: -1 }).exec(function (er, arr) {
                     let i
                     var data = {}
                     arr.forEach((item, index) => {
