@@ -169,6 +169,30 @@ const adminGetDetail = async function (ctx, next) {
     ctx.body = res
 }
 
+const getArchives = async function (ctx, next) {
+    let data = {}
+    await ArticleModel.getAllArticlesOfIssue().then((doc) => {
+        doc.forEach(element => {
+            let date = element.createTime
+            let year = date.getFullYear()
+            let time = String(date.getMonth() + 1) + '-' + String(date.getDate())
+            if (!data[year]) {
+                data[year] = []
+            }
+            data[year].push({
+                title: element.title,
+                time: time,
+                id: element._id
+            })
+        });
+    })
+    ctx.body = {
+        status: 0,
+        message: '获取成功',
+        data: data
+    }
+}
+
 module.exports = [
     { 'method': 'post', 'path': '/admin/article/createNew', 'fn': createNewArticle },
     { 'method': 'delete', 'path': '/admin/article/remove', 'fn': remove },
@@ -177,4 +201,5 @@ module.exports = [
     { 'method': 'get', 'path': '/admin/article/getArticles', 'fn': getArticles },
     { 'method': 'get', 'path': '/api/articles', 'fn': getArticlesOfIssue },
     { 'method': 'get', 'path': '/api/detail', 'fn': getDetail },
+    { 'method': 'get', 'path': '/api/archives', 'fn': getArchives },
 ]
