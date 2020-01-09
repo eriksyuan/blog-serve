@@ -24,10 +24,12 @@ const upload = require('./routes/other/upload')
 
 router.post('/admin/upload', upload.single('file'), ctx => {
     let realHost = ''
-    if (process.env.NODE_ENV === 'production') {
-        realHost = host.cdn ? host.cdn : host.origin
-    } else if (process.env.NODE_ENV === 'development') {
+
+
+    if (process.env.NODE_ENV === 'development') {
         realHost = 'http://localhost:3000'
+    } else {
+        realHost = host.cdn
     }
     ctx.body = {
         status: 0,

@@ -58,7 +58,7 @@ app.use(function (ctx, next) {
 })
 
 app.use(koajwt({ secret }).unless({
-  path: [/^\/admin\/login/,/^\/admin\/upload/,/^\/api/]
+  path: [/^\/admin\/login/,/^\/admin\/upload/,/^\/api/,/^\/images/]
 }))
 
 app.use(async (ctx, next) => {
