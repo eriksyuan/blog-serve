@@ -4,6 +4,7 @@ const Router = require('koa-router')
 const router = Router()
 
 var files = fs.readdirSync(__dirname + '/routes')
+const { host } = require('./config')
 
 console.log(files)
 
@@ -22,15 +23,17 @@ for (let file of js_files) {
 const upload = require('./routes/other/upload')
 
 router.post('/admin/upload', upload.single('file'), ctx => {
-    let uri = ctx.request.headers.host
+    let realHost = ''
     if (process.env.NODE_ENV === 'production') {
-        uri = uri.split(':')[0]
+        realHost = host.cdn ? host.cdn : host.origin
+    } else if (process.env.NODE_ENV === 'development') {
+        realHost = 'http://localhost:3000'
     }
     ctx.body = {
         status: 0,
         message: '上传成功',
         data: {
-            file: 'http://' + uri + '/images/' + ctx.req.file.filename
+            file: realHost + '/images/' + ctx.req.file.filename
         }
     }
 })
